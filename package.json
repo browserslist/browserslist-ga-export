@@ -1,0 +1,32 @@
+{
+  "name": "browserslist-ga-export",
+  "version": "0.1.0",
+  "description": "Generate browserslist-stats.json using Browserslist-GA without logging into a Google Account",
+  "repository": "github:galvarez421/browserslist-ga-export",
+  "author": {
+    "name": "Geraldo Alvarez",
+    "email": "galvarez421@gmail.com"
+  },
+  "license": "MIT",
+  "private": true,
+  "bugs": {
+    "url": "https://github.com/galvarez421/browserslist-ga-export/issues",
+    "email": "galvarez421@gmail.com"
+  },
+  "files": [
+    "index.js"
+  ],
+  "bin": {
+    "browserslist-ga-export": "./index.js"
+  },  
+  "keywords": [
+    "browserslist",
+    "browserslist-ga",
+    "browserslist-stats.json"
+  ],
+  "dependencies": {
+    "browserslist-ga": "0.0.10",
+    "csvtojson": "^1.1.12",
+    "yargs": "^11.0.0"
+  }
+}

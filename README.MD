@@ -8,13 +8,13 @@ browserslist-ga-export allows you to generate the same `browserslist-stats.json`
 If you are using npm:
 
 ```
-$ npm install --save-dev galvarez421/browserslist-ga-export
+$ npm install --save-dev browserslist/browserslist-ga-export
 ```
 
 If you are using Yarn:
 
 ```
-$ yarn add https://github.com/galvarez421/browserslist-ga-export.git
+$ yarn add https://github.com/browserslist/browserslist-ga-export.git
 ```
 
 ## Usage

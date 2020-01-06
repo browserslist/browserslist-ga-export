@@ -25,7 +25,7 @@
     "browserslist-stats.json"
   ],
   "dependencies": {
-    "browserslist-ga": "0.0.10",
+    "browserslist-ga": "0.0.11",
     "csvtojson": "^1.1.12",
     "yargs": "^11.0.0"
   }

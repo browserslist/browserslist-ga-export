@@ -1,6 +1,6 @@
 {
   "name": "browserslist-ga-export",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Generate browserslist-stats.json using Browserslist-GA without logging into a Google Account",
   "repository": "github:browserslist/browserslist-ga-export",
   "author": {
@@ -8,7 +8,6 @@
     "email": "galvarez421@gmail.com"
   },
   "license": "MIT",
-  "private": true,
   "bugs": {
     "url": "https://github.com/browserslist/browserslist-ga-export/issues",
     "email": "galvarez421@gmail.com"

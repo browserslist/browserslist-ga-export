@@ -21,12 +21,17 @@ $ yarn add --dev browserslist-ga-export
 
 ### 1) Export custom report as CSV
 
-1. [Create a custom report](https://support.google.com/analytics/answer/1151300?hl=en) for the desired [Google Analytics view](https://support.google.com/analytics/answer/2649553?hl=en) using the format below. **Note**: The language you see in Google Analytics may vary depending on your user language settings.
+1. [Create a custom report](https://support.google.com/analytics/answer/1151300?hl=en) for the desired [Google Analytics view](https://support.google.com/analytics/answer/2649553?hl=en) using the format below (the language you see in Google Analytics may vary depending on your user language settings):
     - **Type**: Flat Table
-    - **Dimensions** (in this order): Operating System, Operating System Version, Browser, Browser Version, Mobile (Including Tablet)
+    - **Dimensions** (in this order):
+      1. Operating System
+      2. Operating System Version
+      3. Browser
+      4. Browser Version
+      5. Mobile (Including Tablet)
     - **Metrics**: Pageviews or Page Views
 2. View the report.
-3. Sort the report by Browser ascending.
+3. Sort the report by Browser column ascending alphabetically (arrow in column header facing up).
 4. Select the desired date range for the report.
 5. Show 5000 rows for the report.
 6. [Export the report as a CSV](https://support.google.com/analytics/answer/1038573?hl=en).

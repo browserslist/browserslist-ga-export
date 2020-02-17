@@ -28,7 +28,7 @@ $ yarn add --dev browserslist-ga-export
       2. Operating System Version
       3. Browser
       4. Browser Version
-      5. Mobile (Including Tablet)
+      5. Device Category
     - **Metrics**: Pageviews or Page Views
 2. View the report.
 3. Sort the report by Browser column ascending alphabetically (arrow in column header facing up).

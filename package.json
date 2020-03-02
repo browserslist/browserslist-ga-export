@@ -26,6 +26,7 @@
   "dependencies": {
     "browserslist-ga": "0.0.12",
     "csvtojson": "^1.1.12",
+    "glob": "^7.1.6",
     "yargs": "^11.0.0"
   }
 }

@@ -108,8 +108,10 @@ const concatAllFileRows = (allFileRows) => allFileRows
 
 const outputJson = (rows) => {
   try {
+    const isUpdate = fs.existsSync(settings.outputPath);
+
     fs.writeFileSync(settings.outputPath, JSON.stringify(parse(rows), null, 2));
-    console.log(`browserslist-ga-export: ${settings.outputPath} has been ${fs.existsSync(settings.outputPath) ? 'updated' : 'created'}.`);
+    console.log(`browserslist-ga-export: ${settings.outputPath} has been ${isUpdate ? 'updated' : 'created'}.`);
     process.exit();
   } catch (err) {
     handleError(err);

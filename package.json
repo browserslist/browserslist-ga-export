@@ -23,9 +23,15 @@
     "browserslist-ga",
     "browserslist-stats.json"
   ],
+  "scripts": {
+    "prepublishOnly": "crlf --set=LF index.js"
+  },
   "dependencies": {
     "browserslist-ga": "0.0.12",
     "csvtojson": "^1.1.12",
     "yargs": "^11.0.0"
+  },
+  "devDependencies": {
+    "crlf": "^1.1.1"
   }
 }

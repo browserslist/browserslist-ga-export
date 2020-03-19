@@ -1,69 +1,75 @@
 # browserslist-ga-export
+
+## Overview
+
 Generate `browserslist-stats.json` using [Browserslist-GA](https://github.com/browserslist/browserslist-ga) without logging into a Google Account.
 
-browserslist-ga-export allows you to generate the same `browserslist-stats.json` that Browserslist-GA would generate for a Google Analytics view without requiring you to log into a Google Account. Instead of logging into a Google Account, you must provide a CSV export of a [Google Analytics custom report](https://support.google.com/analytics/answer/1151300?hl=en).
+browserslist-ga-export allows you to generate the same [Browserslist](https://github.com/browserslist/browserslist) [custom usage data file](https://github.com/browserslist/browserslist#custom-usage-data) that Browserslist-GA would generate for a [Google Analytics view](https://support.google.com/analytics/answer/2649553?hl=en) without requiring you to log into a Google Account. Instead of logging into a Google Account, you must provide a CSV export of a [Google Analytics custom report](https://support.google.com/analytics/answer/1151300?hl=en). You may optionally provide multiple CSV files to generate a custom usage data file representing the merged data of multiple views.
 
 ## Installation
 
-If you are using npm:
-
 ```
-$ npm install --save-dev browserslist-ga-export
-```
-
-If you are using Yarn:
-
-```
-$ yarn add --dev browserslist-ga-export
+npm install browserslist-ga-export --save-dev
 ```
 
 ## Usage
 
-### 1) Export custom report as CSV
+### 1) Create custom report
 
-1. [Create a custom report](https://support.google.com/analytics/answer/1151300?hl=en) for the desired [Google Analytics view](https://support.google.com/analytics/answer/2649553?hl=en) using the format below (the language you see in Google Analytics may vary depending on your user language settings):
-    - **Type**: Flat Table
-    - **Dimensions** (in this order):
-      1. Operating System
-      2. Operating System Version
-      3. Browser
-      4. Browser Version
-      5. Device Category
-    - **Metrics**: Pageviews or Page Views
-2. View the report.
-3. Sort the report by Browser column ascending alphabetically (arrow in column header facing up).
-4. Select the desired date range for the report.
-5. Show 5000 rows for the report.
-6. [Export the report as a CSV](https://support.google.com/analytics/answer/1038573?hl=en).
+[Create a custom report](https://support.google.com/analytics/answer/1151300?hl=en) with the specifications listed below (the language you see in Google Analytics may vary depending on your user language settings). You will be able to use this custom report for one or more desired [Google Analytics view(s)](https://support.google.com/analytics/answer/2649553?hl=en) associated with a [Google Analytics account](https://support.google.com/analytics/topic/1009690?hl=en&ref_topic=1726911).
 
-### 2) Convert CSV into `browserslist-stats.json`
+- **Report Content**
+  - **Type**: Flat Table
+  - **Dimensions** (in this order):
+    1. Operating System
+    2. Operating System Version
+    3. Browser
+    4. Browser Version
+    5. Device Category
+  - **Metrics**: Pageviews or Page Views
+- **Views**
+  - [Select the option corresponding to the desired view(s)]
 
-If you are using npm v5.2.0 or higher:
+### 2) Export custom report CSV file(s)
 
-```
-$ npx browserslist-ga-export --reportPath {path-to-export}.csv
-```
+For each desired view, follow these steps to export the custom report as a CSV file:
 
-If you are using Yarn:
+1. View the custom report.
+2. Sort the report by Browser column ascending alphabetically (arrow in column header facing up).
+3. Select the desired date range for the report.
+4. Show 5000 rows for the report.
+5. [Export the report as a CSV file](https://support.google.com/analytics/answer/1038573?hl=en).
 
-```
-$ yarn browserslist-ga-export --reportPath {path-to-export}.csv
-```
+### 3) Convert CSV file(s) into custom usage data file
 
-You can also add a script to package.json, for example:
+Use the browserslist-ga-export CLI to convert the CSV file(s) into a custom usage data file (`browserslist-stats.json` by default).
 
 ```
-"scripts": {
-  "update-browserslist-stats": "browserslist-ga-export --reportPath {path-to-export}.csv"
-}
+browserslist-ga-export --reportPath {String} [options]
 ```
 
-### 3) [Query against your custom usage data](https://github.com/browserslist/browserslist#custom-usage-data)
-
-## CLI Options
+## CLI
 
 |Name|Type|Default|Description|
 |:--:|:--:|:-----:|:----------|
-|**`ignoreRows`**|`{Number}`|`7`|Number of rows at beginning of CSV file to exclude from data passed to Browserslist-GA. The default value is based on the default format of Google Analytics custom report CSV exports.|
-|**`outputPath`** |`{String}`|`'browserslist-stats.json'`|Path for exported browserslist-stats file.|
-|**`reportPath`**|`{String}`|`null`|Path of report CSV to process.|
+|**`ignoreRows`**|`{Number}`|`7`|Number of rows at beginning of report CSV file(s) to exclude from processing. Default value is based on the default format of Google Analytics custom report CSV exports. Optional.|
+|**`outputPath`** |`{String}`|`'browserslist-stats.json'`|Output path for generated custom usage data file. Optional.|
+|**`reportPath`**|`{String}`|`null`|Path or [glob](https://www.npmjs.com/package/glob) path pattern of report CSV file(s) to process. Required.|
+
+### Examples
+
+```
+browserslist-ga-export --reportPath browserslist-report.csv
+```
+
+```
+browserslist-ga-export --reportPath browserslist-reports/*.csv
+```
+
+```
+browserslist-ga-export --reportPath browserslist-reports/*.csv --outputPath blstats.json
+```
+
+```
+browserslist-ga-export --reportPath browserslist-reports/*.csv --ignoreRows 0
+```

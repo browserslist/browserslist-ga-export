@@ -52,8 +52,9 @@ csv({
           rowArray[i] = row['field' + (i + 1)];
         }
 
-        // Strip commas from page views string, otherwise conversion to number in parse method will not work as expected
-        rowArray[5] = rowArray[5].split(',').join('');
+        // Strip commas and space delimiters from page views string,
+        // otherwise conversion to number in parse method will not work as expected
+        rowArray[5] = rowArray[5].replace(/,| /, '');
 
         // Add trailing decimal point and 0 to version number string, otherwise getSubVersion in parse method will not work as expected
         rowArray[3] = rowArray[3] + ".0";

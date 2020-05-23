@@ -31,7 +31,7 @@ $ yarn add --dev browserslist-ga-export
       5. Device Category
     - **Metrics**: Pageviews or Page Views
 2. View the report.
-3. Sort the report by Browser column ascending alphabetically (arrow in column header facing up).
+3. Sort the report by Page Views column descending (arrow in column header facing down).
 4. Select the desired date range for the report.
 5. Show 5000 rows for the report.
 6. [Export the report as a CSV](https://support.google.com/analytics/answer/1038573?hl=en).

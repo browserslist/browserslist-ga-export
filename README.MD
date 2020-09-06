@@ -14,11 +14,14 @@ npm install browserslist-ga-export --save-dev
 
 ## Usage
 
-### 1) Create custom report
+### 1) Check user language setting
 
-[Create a custom report](https://support.google.com/analytics/answer/1151300?hl=en) with the specifications listed below (the language you see in Google Analytics may vary depending on your user language settings). You will be able to use this custom report for one or more desired [Google Analytics view(s)](https://support.google.com/analytics/answer/2649553?hl=en) associated with a [Google Analytics account](https://support.google.com/analytics/topic/1009690?hl=en&ref_topic=1726911).
+Ensure that language is set to "English (United States)" in [user language settings](https://support.google.com/analytics/answer/3210078?hl=en). See [#5](https://github.com/browserslist/browserslist-ga-export/pull/5) and [#14](https://github.com/browserslist/browserslist-ga-export/issues/14) for an explanation of why this is necessary.
 
-- **Report Content**
+### 2) Create custom report
+
+[Create a custom report](https://support.google.com/analytics/answer/1151300?hl=en) with the specifications listed below. You will be able to use this custom report for one or more desired [Google Analytics view(s)](https://support.google.com/analytics/answer/2649553?hl=en) associated with a [Google Analytics account](https://support.google.com/analytics/topic/1009690?hl=en&ref_topic=1726911).
+
   - **Type**: Flat Table
   - **Dimensions** (in this order):
     1. Operating System
@@ -26,11 +29,9 @@ npm install browserslist-ga-export --save-dev
     3. Browser
     4. Browser Version
     5. Device Category
-  - **Metrics**: Pageviews or Page Views
-- **Views**
-  - [Select the option corresponding to the desired view(s)]
+  - **Metrics**: Pageviews
 
-### 2) Export custom report CSV file(s)
+### 3) Export custom report CSV file(s)
 
 For each desired view, follow these steps to export the custom report as a CSV file:
 
@@ -40,7 +41,7 @@ For each desired view, follow these steps to export the custom report as a CSV f
 4. Show 5000 rows for the report.
 5. [Export the report as a CSV file](https://support.google.com/analytics/answer/1038573?hl=en).
 
-### 3) Convert CSV file(s) into custom usage data file
+### 4) Convert CSV file(s) into custom usage data file
 
 Use the browserslist-ga-export CLI to convert the CSV file(s) into a custom usage data file (`browserslist-stats.json` by default).
 

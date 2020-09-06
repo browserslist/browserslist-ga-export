@@ -64,6 +64,12 @@ const getFileRows = (path) => new Promise((resolve) => {
   csv({
     noheader: true
   })
+    /**
+     * Prevent empty rows from being skipped by csvtojson so that ignoreRows
+     * option works as expected
+     * See https://github.com/browserslist/browserslist-ga-export/issues/12
+     */
+    .preFileLine(row => row === '' ? ' ' : row)
     .fromFile(path)
     .on('error', handleError)
     .on('end_parsed', resolve);

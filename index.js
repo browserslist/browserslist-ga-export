@@ -3,42 +3,30 @@
 const csv = require('csvtojson');
 const fs = require('fs');
 const { parse } = require('browserslist-ga/src/caniuse-parser');
-const args = require('yargs').argv;
-const glob = require('glob');
+const yargs = require('yargs/yargs');
+const { hideBin } = require('yargs/helpers');
+const glob = require('fast-glob');
 
-const defaults = {
-  ignoreRows: 7,
-  outputPath: 'browserslist-stats.json',
-  reportPath: null,
-};
-const settings = Object.assign({}, defaults, args);
-
-let error = false;
-
-if (typeof settings.ignoreRows !== 'number') {
-  console.error(
-    new TypeError('browserslist-ga-export: ignoreRows must be a number.')
-  );
-  error = true;
-}
-
-if (typeof settings.outputPath !== 'string') {
-  console.error(
-    new TypeError('browserslist-ga-export: outputPath must be a string.')
-  );
-  error = true;
-}
-
-if (typeof settings.reportPath !== 'string') {
-  console.error(
-    new TypeError('browserslist-ga-export: reportPath must be a string.')
-  );
-  error = true;
-}
-
-if (error === true) {
-  process.exit(1);
-}
+const args = yargs(hideBin(process.argv))
+  .option('ignoreRows', {
+    alias: 'i',
+    type: 'number',
+    description: 'Number of rows at beginning of report CSV file(s) to exclude from processing. Default value is based on the default format of Google Analytics custom report CSV exports',
+    default: 7
+  })
+  .option('outputPath', {
+    alias: 'o',
+    type: 'string',
+    description: 'Output path for generated custom usage data file',
+    default: 'browserslist-stats.json'
+  })
+  .option('reportPath', {
+    alias: 'r',
+    type: 'string',
+    description: 'Path or [glob](https://www.npmjs.com/package/fast-glob) path pattern of report CSV file(s) to process',
+    demandOption: true
+  })
+  .argv
 
 const headers = [
   'os',
@@ -54,13 +42,9 @@ const handleError = (err) => {
   process.exit(1);  
 };
 
-const getAllFilePaths = (pattern) => new Promise((resolve) => {
-  glob(pattern, (err, files) => {
-    resolve(files);
-  });
-});
+const getAllFilePaths = (pattern) => glob(pattern);
 
-const getFileRows = (path) => new Promise((resolve) => {
+const getFileRows = (path) => 
   csv({
     noheader: true
   })
@@ -70,15 +54,17 @@ const getFileRows = (path) => new Promise((resolve) => {
      * See https://github.com/browserslist/browserslist-ga-export/issues/12
      */
     .preFileLine(row => row === '' ? ' ' : row)
-    .fromFile(path)
-    .on('error', handleError)
-    .on('end_parsed', resolve);
-});
+    .fromFile(path);
 
-const getAllFileRows = (paths) => Promise.all(paths.map(getFileRows));
+const getAllFileRows = (paths) => {
+  if (paths.length === 0) {
+    throw new Error('No input reportPath files found.');
+  }
+  return Promise.all(paths.map(getFileRows));
+}
 
 const filterAllFileRows = (allFileRows) => allFileRows
-  .map((fileRows) => fileRows.filter((row, i) => i >= settings.ignoreRows));
+  .map((fileRows) => fileRows.filter((row, i) => i >= args.ignoreRows));
 
 /**
  * Convert array of row objects returned by csvtojson into row arrays expected
@@ -110,23 +96,20 @@ const convertFileRows = (rows) => rows
 const convertAllFileRows = (allFileRows) => allFileRows.map(convertFileRows);
 
 const concatAllFileRows = (allFileRows) => allFileRows
-  .reduce((combined, fileRows) => combined.concat(fileRows));
+  .reduce((combined, fileRows) => combined.concat(fileRows), []);
 
 const outputJson = (rows) => {
-  try {
-    const isUpdate = fs.existsSync(settings.outputPath);
+  const isUpdate = fs.existsSync(args.outputPath);
 
-    fs.writeFileSync(settings.outputPath, JSON.stringify(parse(rows), null, 2));
-    console.log(`browserslist-ga-export: ${settings.outputPath} has been ${isUpdate ? 'updated' : 'created'}.`);
-    process.exit();
-  } catch (err) {
-    handleError(err);
-  }
+  fs.writeFileSync(args.outputPath, JSON.stringify(parse(rows), null, 2));
+  console.log(`browserslist-ga-export: ${args.outputPath} has been ${isUpdate ? 'updated' : 'created'}.`);
+  process.exit();
 };
 
-getAllFilePaths(settings.reportPath)
+getAllFilePaths(args.reportPath)
   .then(getAllFileRows)
   .then(filterAllFileRows)
   .then(convertAllFileRows)
   .then(concatAllFileRows)
-  .then(outputJson);
+  .then(outputJson)
+  .catch(handleError);

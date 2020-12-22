@@ -8,7 +8,7 @@ browserslist-ga-export allows you to generate the same [Browserslist](https://gi
 
 ## Installation
 
-```
+```bash
 npm install browserslist-ga-export --save-dev
 ```
 
@@ -43,34 +43,59 @@ For each desired view, follow these steps to export the custom report as a CSV f
 
 ### 4) Convert CSV file(s) into custom usage data file
 
-Use the browserslist-ga-export CLI to convert the CSV file(s) into a custom usage data file (`browserslist-stats.json` by default).
+Use the browserslist-ga-export CLI to convert the CSV file(s) into a custom usage data file (`browserslist-stats.json` by default). See CLI documentation for more details.
 
-```
+```bash
 browserslist-ga-export --reportPath {String} [options]
 ```
 
 ## CLI
 
-|Name|Type|Default|Description|
-|:--:|:--:|:-----:|:----------|
-|**`ignoreRows`**|`{Number}`|`7`|Number of rows at beginning of report CSV file(s) to exclude from processing. Default value is based on the default format of Google Analytics custom report CSV exports. Optional.|
-|**`outputPath`** |`{String}`|`'browserslist-stats.json'`|Output path for generated custom usage data file. Optional.|
-|**`reportPath`**|`{String}`|`null`|Path or [glob](https://www.npmjs.com/package/glob) path pattern of report CSV file(s) to process. Required.|
+### Commands
+
+#### `browserslist-ga-export`
+
+Create or update a custom usage data JSON file from one or more report CSV files given a report path and an output path.
+
+### Options
+
+#### `--reportPath` (`-r`)
+
+Path or [glob](https://www.npmjs.com/package/fast-glob) path pattern of report CSV file(s) to process.
+
+- Required
+- Type: string
+
+#### `--ignoreRows` (`-i`)
+
+Number of rows at beginning of report CSV file(s) to exclude from processing. Default value is based on the default format of Google Analytics custom report CSV exports.
+
+- Optional
+- Type: number
+- Default: `7`
+
+#### `--outputPath` (`-o`)
+
+Output path for generated custom usage data file.
+
+- Optional
+- Type: string
+- Default: `'browserslist-stats.json'`
 
 ### Examples
 
-```
+```bash
 browserslist-ga-export --reportPath browserslist-report.csv
 ```
 
-```
-browserslist-ga-export --reportPath browserslist-reports/*.csv
-```
-
-```
-browserslist-ga-export --reportPath browserslist-reports/*.csv --outputPath blstats.json
+```bash
+browserslist-ga-export -r browserslist-reports/*.csv
 ```
 
+```bash
+browserslist-ga-export --r browserslist-reports/*.csv --o blstats.json
 ```
-browserslist-ga-export --reportPath browserslist-reports/*.csv --ignoreRows 0
+
+```bash
+browserslist-ga-export --r browserslist-reports/*.csv --i 0
 ```

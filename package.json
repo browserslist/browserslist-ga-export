@@ -1,6 +1,6 @@
 {
   "name": "browserslist-ga-export",
-  "version": "3.0.0",
+  "version": "4.0.0",
   "description": "Generate browserslist-stats.json using Browserslist-GA without logging into a Google Account",
   "repository": "github:browserslist/browserslist-ga-export",
   "author": {

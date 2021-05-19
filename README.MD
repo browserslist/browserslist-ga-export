@@ -93,9 +93,9 @@ browserslist-ga-export -r browserslist-reports/*.csv
 ```
 
 ```bash
-browserslist-ga-export --r browserslist-reports/*.csv --o blstats.json
+browserslist-ga-export -r browser-report.csv -o browser-stats.json
 ```
-
+ 
 ```bash
-browserslist-ga-export --r browserslist-reports/*.csv --i 0
+browserslist-ga-export -r browser-report.csv -i 0
 ```

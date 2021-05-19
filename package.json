@@ -27,7 +27,7 @@
     "prepublishOnly": "crlf --set=LF index.js"
   },
   "dependencies": {
-    "browserslist-ga": "0.0.12",
+    "browserslist-ga": "0.0.13",
     "csvtojson": "^2.0.10",
     "fast-glob": "^3.2.4",
     "yargs": "^16.2.0"

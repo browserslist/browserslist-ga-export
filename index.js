@@ -78,7 +78,7 @@ const convertFileRows = (rows) => rows
      * Add trailing decimal point and 0 to browser version number string,
      * otherwise getSubVersion in parse method will not work as expected
      */
-    if (i === headers.indexOf('browserVersion')) {
+    if (i === headers.indexOf('browserVersion') && value.indexOf('.') === -1) {
       value = `${value}.0`;
     }
 

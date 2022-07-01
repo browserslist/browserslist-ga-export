@@ -11,19 +11,19 @@ const args = yargs(hideBin(process.argv))
   .option('ignoreRows', {
     alias: 'i',
     type: 'number',
-    description: 'Number of rows at beginning of report CSV file(s) to exclude from processing. Default value is based on the default format of Google Analytics custom report CSV exports',
+    description: 'Number of rows at beginning of report CSV file(s) to exclude from processing. Default value is based on the default format of Google Analytics custom report CSV exports.',
     default: 7
   })
   .option('outputPath', {
     alias: 'o',
     type: 'string',
-    description: 'Output path for generated custom usage data file',
+    description: 'Output path for generated custom usage data file. If a file already exists at `--outputPath`, that file will be overwritten.',
     default: 'browserslist-stats.json'
   })
   .option('reportPath', {
     alias: 'r',
     type: 'string',
-    description: 'Path or [glob](https://www.npmjs.com/package/fast-glob) path pattern of report CSV file(s) to process',
+    description: 'Path or [glob](https://www.npmjs.com/package/fast-glob) path pattern of report CSV file(s) to process. If a glob path pattern is provided that resolves to multiple files, the custom usage data file will represent the merged data of those files.',
     demandOption: true
   })
   .argv

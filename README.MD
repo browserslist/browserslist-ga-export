@@ -52,22 +52,20 @@ browserslist-ga-export --reportPath {String} [options]
 
 ## CLI
 
-### Commands
-
-#### `browserslist-ga-export`
+### `browserslist-ga-export`
 
 Create a custom usage data JSON file based on one or more Google Analytics custom report CSV files (see [usage instructions](#usage)).
 
-### Options
+#### Options
 
-#### `--reportPath` (`-r`)
+##### `--reportPath` (`-r`)
 
 Path or [glob](https://www.npmjs.com/package/fast-glob) path pattern of report CSV file(s) to process. If a glob path pattern is provided that resolves to multiple files, the custom usage data file will represent the merged data of those files.
 
 - Required
 - Type: string
 
-#### `--ignoreRows` (`-i`)
+##### `--ignoreRows` (`-i`)
 
 Number of rows at beginning of report CSV file(s) to exclude from processing. Default value is based on the default format of Google Analytics custom report CSV exports.
 
@@ -75,7 +73,7 @@ Number of rows at beginning of report CSV file(s) to exclude from processing. De
 - Type: number
 - Default: `7`
 
-#### `--outputPath` (`-o`)
+##### `--outputPath` (`-o`)
 
 Output path for generated custom usage data file. If a file already exists at `--outputPath`, that file will be overwritten.
 
@@ -83,7 +81,7 @@ Output path for generated custom usage data file. If a file already exists at `-
 - Type: string
 - Default: `'browserslist-stats.json'`
 
-### Examples
+#### Examples
 
 ```bash
 browserslist-ga-export --reportPath browserslist-report.csv

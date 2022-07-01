@@ -37,10 +37,10 @@ For each desired view, follow these steps to export the custom report as a CSV f
 
 1. View the custom report.
 2. Sort the report by Browser column ascending alphabetically (arrow in column header facing up).
-   - Alternatively, sort the report by Pageviews column descending (arrow in column header facing down). This will prioritize using data from browsers with more pageviews but may result in a different custom usage data file than the one that Browserslist-GA would generate. (see [#16](https://github.com/browserslist/browserslist-ga-export/issues/16)).
 3. Select the desired date range for the report.
 4. Show 5000 rows for the report.
 5. [Export the report as a CSV file](https://support.google.com/analytics/answer/1038573?hl=en).
+6. If your report has more than 5,000 rows, you must export each page of the report individually and then use a glob pattern for `--reportPath` (see [CLI](#cli) section) to generate a custom usage data that accounts for all pages/exports of the report.
 
 ### 4) Convert CSV file(s) into custom usage data file
 
